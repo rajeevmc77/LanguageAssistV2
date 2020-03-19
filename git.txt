@@ -11,3 +11,18 @@ git remote add origin https://github.com/rajeevmc77/LanguageAssistV2.git
 git push -u origin master
 …or import code from another repository
 You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+
+
+commands 
+
+git config  user.email rajeevmc77@gmail.com
+git config  user.name "Rajeev M C"
+
+cat git/config
+
+git add .
+git commit -m "First Commit"
+git push origin master
+
+
+
