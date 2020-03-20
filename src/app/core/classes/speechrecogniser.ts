@@ -19,31 +19,26 @@ export class SpeechRecogniser {
     }
     const speechStream = new  Observable( (obs) => {
       this.recognition.onresult = (e) => {
-        console.log(e);
         obs.next(e);
       };
       this.recognition.onerror = (e) => {
-        obs.next(e);
-        obs.complete();
+        obs.error(e);
       };
       this.recognition.onend = (e) => {
-        console.log(e);
-        obs.next(e);
         obs.complete();
-        // this.recognition.stop();
       };
-      try {
-        this.recognition.start();
-        console.log('startedlistening');
-      } catch (exp) {
-        this.recognition.stop();
-        console.log(exp.message);
-      }
       return () => {
         this.recognition.stop();
       };
     });
-    return speechStream;
+    try {
+      this.recognition.start();
+      console.log('listening...');
+      return speechStream;
+    } catch (exp) {
+      this.recognition.stop();
+      console.log(exp.message);
+    }
   }
 
 }

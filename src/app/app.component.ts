@@ -27,7 +27,7 @@ export class AppComponent {
     if (speechResp) {
       speechResp.subscribe(
         (resp: any ) => {
-         // this.zone.run(() => this.type = resp.type );
+          this.zone.run(() => this.type = resp.type );
           if ( 'results' in resp) {
             const spokenText = Array.from(resp.results)
                         // .filter((result: any) => { if ( result.isFinal ) { return result; } } )
@@ -35,10 +35,13 @@ export class AppComponent {
                         .map(result => result.transcript)
                         .join('');
             this.zone.run(() => this.spokenText = spokenText );
-          } else if ('error' in resp) {
-            this.spokenText = resp.error;
-            this.zone.run(() => this.spokenText = resp.error );
           }
+        },
+        (err:any) => {
+          console.log(err);
+        },
+        () => {
+          console.log('Listening Completed');
         }
       );
     }
