@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SpeechrecorderComponent } from './speechrecorder/speechrecorder.component';
+
+import { SpeechRoutingModule } from './speech-routing.module';
+
+import { RecorderComponent } from './recorder/recorder.component';
+import { SpeakerComponent } from './speaker/speaker.component';
+
 
 @NgModule({
-  declarations: [SpeechrecorderComponent],
+  declarations: [ RecorderComponent, SpeakerComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    SpeechRoutingModule
   ],
-  exports: [ SpeechrecorderComponent]
+  exports: [ RecorderComponent, SpeakerComponent ]
 })
 export class SpeechModule { }

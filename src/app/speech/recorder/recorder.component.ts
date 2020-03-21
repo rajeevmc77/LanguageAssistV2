@@ -2,11 +2,12 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import {SpeechRecogniser} from '../../core/classes/speechrecogniser';
 
 @Component({
-  selector: 'app-speechrecorder',
-  templateUrl: './speechrecorder.component.html',
-  styleUrls: ['./speechrecorder.component.css']
+  selector: 'app-recorder',
+  templateUrl: './recorder.component.html',
+  styleUrls: ['./recorder.component.css']
 })
-export class SpeechrecorderComponent implements OnInit {
+
+export class RecorderComponent implements OnInit {
 
   speechListener: SpeechRecogniser;
   spokenText = 'Say Something!';
