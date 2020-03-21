@@ -3,4 +3,9 @@
 <button routerLink="/speech/recorder">Recorder</button>
 <button routerLink="/speech/speaker">Speaker</button>
 
+<button (click)="startAudio()">SpeakerMyWord</button>
+
+
+<app-speaker #speaker [messagetoSpeak] = "message"> </app-speaker>
+
 <router-outlet></router-outlet>

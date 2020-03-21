@@ -44,6 +44,7 @@ export class Speechsynthesizer {
       const msgArr = this.decompose(message, 15);
       for (const msg of msgArr) {
         if (!this.cancelspeak) {
+          console.log(msg);
           await this.speakinBatches(msg);
         } else {
           break;
@@ -64,6 +65,7 @@ export class Speechsynthesizer {
         };
     });
     this.toSpeak.text = message;
+    this.toSpeak.voice = this.voices[2];
     this.synth.speak(this.toSpeak);
     return promise;
   }
