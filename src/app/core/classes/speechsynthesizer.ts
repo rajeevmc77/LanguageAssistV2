@@ -42,7 +42,7 @@ export class Speechsynthesizer {
     this.cancelspeak = false;
     try {
       const msgArr = this.decompose(message, 15);
-      for (const msg in msgArr) {
+      for (const msg of msgArr) {
         if (!this.cancelspeak) {
           await this.speakinBatches(msg);
         } else {
