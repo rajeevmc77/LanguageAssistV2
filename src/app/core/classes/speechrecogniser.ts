@@ -18,13 +18,21 @@ export class SpeechRecogniser {
       throw new Error('speech recognition not supported');
     }
     const speechStream = new  Observable( (obs) => {
-      this.recognition.onresult = (e) => {
-        obs.next(e);
+      this.recognition.onresult = (resp: any) => {
+        let spokenText = ' ';
+        if ( 'results' in resp) {
+          spokenText = Array.from(resp.results)
+                      // .filter((result: any) => { if ( result.isFinal ) { return result; } } )
+                      .map(result => result[0])
+                      .map(result => result.transcript)
+                      .join('');
+        }
+        obs.next(spokenText);
       };
-      this.recognition.onerror = (e) => {
-        obs.error(e);
+      this.recognition.onerror = (err: any) => {
+        obs.error(err);
       };
-      this.recognition.onend = (e) => {
+      this.recognition.onend = (e: any) => {
         obs.complete();
       };
       return () => {

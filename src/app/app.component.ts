@@ -12,7 +12,8 @@ declare var diffString: any;
 export class AppComponent {
   speechListener: SpeechRecogniser;
   spokenText = 'Say Something!';
-  type = 'type';
+  errorMessage = '';
+  isListening = false;
 //
   constructor(private zone: NgZone) {
     this.speechListener = new SpeechRecogniser();
@@ -24,23 +25,19 @@ export class AppComponent {
   listen(event: any) {
     // event.target.disabled = true;
     const speechResp = this.speechListener.startListening();
+    this.isListening = true;
     if (speechResp) {
       speechResp.subscribe(
         (resp: any ) => {
-          this.zone.run(() => this.type = resp.type );
-          if ( 'results' in resp) {
-            const spokenText = Array.from(resp.results)
-                        // .filter((result: any) => { if ( result.isFinal ) { return result; } } )
-                        .map(result => result[0])
-                        .map(result => result.transcript)
-                        .join('');
-            this.zone.run(() => this.spokenText = spokenText );
-          }
+          this.isListening = false;
+          this.zone.run(() => this.spokenText = resp );
         },
-        (err:any) => {
-          console.log(err);
+        (err: any) => {
+          this.zone.run(() => this.errorMessage = err );
+          this.isListening = false;
         },
         () => {
+          this.isListening = false;
           console.log('Listening Completed');
         }
       );

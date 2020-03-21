@@ -1,8 +1,12 @@
+<div class="google-microphone" (click)="listen($event)">
+  <div [ngClass]="{'shadow listening': isListening }" > <!--class="shadow listening"-->
+    <div class="gn">
+      <div class="mc"></div>
+    </div>
+  </div>
+</div>
 
-<button type="button" (click)="listen($event)">Speak Something! </button>
-
-<span> You Said : {{ spokenText }} </span>
-<span> TYPE : {{ type }} </span>
-
+<p> You Said : {{ spokenText }} </p>
+<p> Error : {{ errorMessage }} </p>
 
 <router-outlet></router-outlet>
