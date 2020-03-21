@@ -24,21 +24,24 @@ export class AppComponent {
 
   listen(event: any) {
     // event.target.disabled = true;
-    const speechResp = this.speechListener.startListening();
-    this.isListening = true;
+    this.isListening = !this.isListening;
+    let speechResp;
+    if ( this.isListening) {
+       speechResp = this.speechListener.startListening();
+    } else {
+      this.speechListener.stopListening();
+    }
     if (speechResp) {
       speechResp.subscribe(
         (resp: any ) => {
-          this.isListening = false;
-          this.zone.run(() => this.spokenText = resp );
+          this.zone.run(() => { this.spokenText = resp; this.isListening = false; } );
         },
         (err: any) => {
-          this.zone.run(() => this.errorMessage = err );
-          this.isListening = false;
+          this.zone.run(() => { this.errorMessage = err.message; this.isListening = false; });
         },
         () => {
           this.isListening = false;
-          console.log('Listening Completed');
+          this.zone.run(() => { this.isListening = false; });
         }
       );
     }

@@ -22,7 +22,6 @@ export class SpeechRecogniser {
         let spokenText = ' ';
         if ( 'results' in resp) {
           spokenText = Array.from(resp.results)
-                      // .filter((result: any) => { if ( result.isFinal ) { return result; } } )
                       .map(result => result[0])
                       .map(result => result.transcript)
                       .join('');
@@ -41,11 +40,20 @@ export class SpeechRecogniser {
     });
     try {
       this.recognition.start();
-      console.log('listening...');
       return speechStream;
     } catch (exp) {
       this.recognition.stop();
-      console.log(exp.message);
+    }
+  }
+
+  public stopListening() {
+    if (!this.recognition) {
+      throw new Error('speech recognition not supported');
+    }
+    try {
+      this.recognition.abort();
+    } catch (exp) {
+      this.recognition.stop();
     }
   }
 

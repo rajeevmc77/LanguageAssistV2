@@ -12,12 +12,12 @@ body {
 
 .shadow {
     position: relative;
-    margin: 5% auto;
+    /* margin: 5% auto; */
     border-radius: 50%;
     width: 3.5em;
     height: 3.5em;
     background: #DBDBDB;
-    top: 20%;
+    /* top: 20%; */
     display: flex;
     justify-content: center;
     align-items: center;
