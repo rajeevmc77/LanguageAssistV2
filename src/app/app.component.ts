@@ -1,5 +1,4 @@
 import { Component, NgZone } from '@angular/core';
-import {SpeechrecorderComponent} from './speech/speechrecorder/speechrecorder.component';
 
 declare var diffString: any;
 
