@@ -5,15 +5,14 @@ import { SpeechRoutingModule } from './speech-routing.module';
 
 import { RecorderComponent } from './recorder/recorder.component';
 import { SpeakerComponent } from './speaker/speaker.component';
-import { AudioplayerComponent } from './audioplayer/audioplayer.component';
 
 
 @NgModule({
-  declarations: [ RecorderComponent, SpeakerComponent, AudioplayerComponent],
+  declarations: [ RecorderComponent, SpeakerComponent],
   imports: [
     CommonModule,
     SpeechRoutingModule
   ],
-  exports: [ RecorderComponent, SpeakerComponent, AudioplayerComponent ]
+  exports: [ RecorderComponent, SpeakerComponent ]
 })
 export class SpeechModule { }

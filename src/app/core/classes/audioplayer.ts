@@ -1,11 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-@Component({
-  selector: 'app-audioplayer',
-  templateUrl: './audioplayer.component.html',
-  styleUrls: ['./audioplayer.component.css']
-})
-export class AudioplayerComponent implements OnInit {
+export class AudioPlayer {
   private audioObj: any;
   private currentURL: string;
 
@@ -41,8 +34,5 @@ export class AudioplayerComponent implements OnInit {
     } catch (exp) {
       console.log(exp.message);
     }
-  }
-
-  ngOnInit() {
   }
 }
