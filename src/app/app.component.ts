@@ -9,14 +9,14 @@ declare var diffString: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
-  private message: string;
+  public message: string;
   @ViewChild ('speaker', { read: SpeakerComponent, static: true} )
   speakerObj: SpeakerComponent;
 
   constructor() {
-    const str1 = 'This is Rajeev';
-    const str2 = 'this is Rajesh';
-    const res = diffString(str1, str2);
+    // const str1 = 'This is Rajeev';
+    // const str2 = 'this is Rajesh';
+    // const res = diffString(str1, str2);
 
     this.message = `By default, NgModules are eagerly loaded,
     which means that as soon as the app loads, so do all the NgModules,

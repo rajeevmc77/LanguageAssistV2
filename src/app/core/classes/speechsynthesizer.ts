@@ -1,7 +1,7 @@
 const Synthesizer = window.speechSynthesis;
 
 export class Speechsynthesizer {
-  private synth ;
+  private synth: any;
   private toSpeak: SpeechSynthesisUtterance;
   private voices: any;
   private cancelspeak: boolean;
@@ -44,8 +44,7 @@ export class Speechsynthesizer {
       const msgArr = this.decompose(message, 15);
       for (const msg of msgArr) {
         if (!this.cancelspeak) {
-          console.log(msg);
-          await this.speakinBatches(msg);
+          await this.speakMessage(msg);
         } else {
           break;
         }
@@ -55,11 +54,14 @@ export class Speechsynthesizer {
     }
   }
 
-  private speakinBatches(message) {
+  private speakMessage(message) {
     const promise = new Promise((resolve, reject) => {
          this.toSpeak.onend = (evt) => {
           resolve(evt);
         };
+        //  this.toSpeak.onboundary = (evt) => {
+        //   console.log(evt);
+        // };
          this.toSpeak.onerror = (evt) => {
           reject(evt);
         };
