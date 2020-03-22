@@ -47,6 +47,9 @@ export class AppComponent implements AfterViewInit {
   public playAudio() {
     this.audioPlayer.playURL('assets/audio/SheebutheSheep_1.mp3');
   }
+  public playAudioFragment() {
+    this.audioPlayer.playForDuration(10, 20);
+  }
 
 }
 
