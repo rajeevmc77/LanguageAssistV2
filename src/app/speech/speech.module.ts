@@ -14,6 +14,6 @@ import { AudioplayerComponent } from './audioplayer/audioplayer.component';
     CommonModule,
     SpeechRoutingModule
   ],
-  exports: [ RecorderComponent, SpeakerComponent ]
+  exports: [ RecorderComponent, SpeakerComponent, AudioplayerComponent ]
 })
 export class SpeechModule { }

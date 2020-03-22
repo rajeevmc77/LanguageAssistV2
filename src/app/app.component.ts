@@ -1,5 +1,6 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import {SpeakerComponent} from './speech/speaker/speaker.component';
+import { AudioplayerComponent } from './speech/audioplayer/audioplayer.component';
 
 declare var diffString: any;
 
@@ -12,6 +13,12 @@ export class AppComponent implements AfterViewInit {
   public message: string;
   @ViewChild ('speaker', { read: SpeakerComponent, static: true} )
   speakerObj: SpeakerComponent;
+  @ViewChild(AudioplayerComponent)
+  // tslint:disable-next-line: variable-name
+  private _audioPlayer: AudioplayerComponent;
+  public get audioPlayer(): AudioplayerComponent {
+    return this._audioPlayer;
+  }
 
   constructor() {
     const str1 = 'This is Rajeev';
@@ -36,6 +43,9 @@ export class AppComponent implements AfterViewInit {
 
   public startAudio() {
     this.speakerObj.speak();
+  }
+  public playAudio() {
+    this.audioPlayer.playURL('assets/audio/SheebutheSheep_1.mp3');
   }
 
 }

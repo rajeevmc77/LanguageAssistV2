@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-audioplayer',
@@ -46,5 +45,4 @@ export class AudioplayerComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
