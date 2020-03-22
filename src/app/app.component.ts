@@ -1,4 +1,4 @@
-import { Component, NgZone, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import {SpeakerComponent} from './speech/speaker/speaker.component';
 
 declare var diffString: any;
@@ -14,9 +14,9 @@ export class AppComponent implements AfterViewInit {
   speakerObj: SpeakerComponent;
 
   constructor() {
-    // const str1 = 'This is Rajeev';
-    // const str2 = 'this is Rajesh';
-    // const res = diffString(str1, str2);
+    const str1 = 'This is Rajeev';
+    const str2 = 'this is Rajesh';
+    const res = diffString(str1, str2);
 
     this.message = `By default, NgModules are eagerly loaded,
     which means that as soon as the app loads, so do all the NgModules,
@@ -29,7 +29,7 @@ export class AppComponent implements AfterViewInit {
     cd customer-app.`;
   }
   ngAfterViewInit(): void {
-    //throw new Error("Method not implemented.");
+    //  throw new Error("Method not implemented.");
   }
 
   public startAudio() {
