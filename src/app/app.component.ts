@@ -18,6 +18,8 @@ export class AppComponent implements AfterViewInit {
     const str2 = 'this is Rajesh';
     const res = diffString(str1, str2);
 
+    console.log(res);
+
     this.message = `By default, NgModules are eagerly loaded,
     which means that as soon as the app loads, so do all the NgModules,
     whether or not they are immediately necessary. For large apps with lots of routes,
