@@ -14,7 +14,7 @@ export class AppComponent implements AfterViewInit {
   public message: string;
   @ViewChild ('speaker', { read: SpeakerComponent, static: true} )
   speakerObj: SpeakerComponent;
-  @ViewChild ('speachReview', { read: SpeakerComponent, static: true} )
+  @ViewChild ('speachReview', { read: SpeechreviewComponent, static: true} )
   speachReviewObj: SpeechreviewComponent;
 
   private audioPlayer: AudioPlayer;
@@ -33,7 +33,14 @@ export class AppComponent implements AfterViewInit {
   }
   ngAfterViewInit(): void {
     //  throw new Error("Method not implemented.");
-    this.speachReviewObj.compareText();
+  }
+
+  public diffText() {
+    try {
+      this.speachReviewObj.compareText();
+    } catch (exp) {
+      console.log(exp.message);
+    }
   }
 
   public startAudio() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import {TextComparer} from '../../core/classes/text-comparer';
 
 
@@ -15,12 +15,13 @@ export class SpeechreviewComponent implements OnInit {
   @Input()
   spokenText: string;
 
-  constructor() {
+  constructor(private rootElement: ElementRef) {
     this.textComparer = new  TextComparer();
   }
 
   public compareText() {
     this.speechDiffString = this.textComparer.diffTexts(this.originalText, this.spokenText);
+    this.rootElement.nativeElement.innerHTML = this.speechDiffString ;
   }
 
   ngOnInit(): void {
