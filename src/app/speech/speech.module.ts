@@ -15,6 +15,6 @@ import { SpeechreviewComponent } from './speechreview/speechreview.component';
     CommonModule,
     SpeechRoutingModule
   ],
-  exports: [ RecorderComponent, SpeakerComponent ]
+  exports: [ RecorderComponent, SpeakerComponent, SpeechassessComponent, SpeechreviewComponent ]
 })
 export class SpeechModule { }

@@ -1,5 +1,6 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import {SpeakerComponent} from './speech/speaker/speaker.component';
+import {SpeechreviewComponent} from './speech/speechreview/speechreview.component';
 import { AudioPlayer } from './core/classes/audioplayer';
 
 declare var diffString: any;
@@ -13,29 +14,26 @@ export class AppComponent implements AfterViewInit {
   public message: string;
   @ViewChild ('speaker', { read: SpeakerComponent, static: true} )
   speakerObj: SpeakerComponent;
+  @ViewChild ('speachReview', { read: SpeakerComponent, static: true} )
+  speachReviewObj: SpeechreviewComponent;
+
   private audioPlayer: AudioPlayer;
   public isPlaying: boolean;
+  public originalText: string;
+  public spokenText: string;
+
   constructor() {
     this.isPlaying = false;
     this.audioPlayer = new AudioPlayer();
-    const str1 = 'This is Rajeev';
-    const str2 = 'this is Rajesh';
-    const res = diffString(str1, str2);
 
-    console.log(res);
+    this.message = `I am Rajeev. This is my test application to support the kids to learn English.`;
 
-    this.message = `By default, NgModules are eagerly loaded,
-    which means that as soon as the app loads, so do all the NgModules,
-    whether or not they are immediately necessary. For large apps with lots of routes,
-    consider lazy loading—a design pattern that loads NgModules as needed. Lazy loading
-    helps keep initial bundle sizes smaller, which in turn helps decrease load times.
-    This creates an app called customer-app and the --routing flag generates a file called
-    app-routing.module.ts, which is one of the files you need for setting up lazy
-    loading for your feature module. Navigate into the project by issuing the command
-    cd customer-app.`;
+    this.originalText = this.message;
+    this.spokenText = 'I am Rajesh. This is my sample application to help study English.';
   }
   ngAfterViewInit(): void {
     //  throw new Error("Method not implemented.");
+    this.speachReviewObj.compareText();
   }
 
   public startAudio() {
