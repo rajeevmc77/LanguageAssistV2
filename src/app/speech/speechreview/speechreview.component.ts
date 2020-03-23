@@ -20,8 +20,8 @@ export class SpeechreviewComponent implements OnInit {
   }
 
   public compareText() {
-    this.speechDiffString = this.textComparer.diffTexts(this.originalText, this.spokenText);
-    this.rootElement.nativeElement.innerHTML = this.speechDiffString ;
+    this.rootElement.nativeElement.innerHTML = this.textComparer.diffTexts(this.originalText,
+                                              this.spokenText);
   }
 
   ngOnInit(): void {

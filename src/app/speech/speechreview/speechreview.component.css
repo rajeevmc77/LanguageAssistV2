@@ -1,0 +1,7 @@
+:host ::ng-deep del {
+    color: red;
+}
+
+:host ::ng-deep ins {
+    color: blue;
+}
