@@ -30,7 +30,9 @@
                             "src/styles/font-awesome-4.7.0/css/font-awesome.min.css"
                         ],
                         "scripts": [
-                            "src/scripts/jsdiff.js"
+                            "src/scripts/jsdiff.js",
+                            "src/scripts/soundex.js",
+                            "src/scripts/stopwords.js"
                         ]
                     },
                     "configurations": {

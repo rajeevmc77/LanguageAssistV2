@@ -5,10 +5,12 @@ import { SpeechRoutingModule } from './speech-routing.module';
 
 import { RecorderComponent } from './recorder/recorder.component';
 import { SpeakerComponent } from './speaker/speaker.component';
+import { SpeechassessComponent } from './speechassess/speechassess.component';
+import { SpeechreviewComponent } from './speechreview/speechreview.component';
 
 
 @NgModule({
-  declarations: [ RecorderComponent, SpeakerComponent],
+  declarations: [ RecorderComponent, SpeakerComponent, SpeechassessComponent, SpeechreviewComponent],
   imports: [
     CommonModule,
     SpeechRoutingModule

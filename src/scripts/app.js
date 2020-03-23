@@ -3,10 +3,10 @@
 let speechHelper = new SpeechHelper();
 let stringDiff = new DiffHelper();
 let speechRecognitionStatus = "stop";
-let story = `Sheebu was a sheep. One day she found a bell. She thought to herself 'Wow! What a tingle-jingle bell. 
-        I will wear this bell.' She hung it around her neck. 
+let story = `Sheebu was a sheep. One day she found a bell. She thought to herself 'Wow! What a tingle-jingle bell.
+        I will wear this bell.' She hung it around her neck.
         Seeing the bell her friends asked, "Sheebu, what a lovely bell you have." Sheebu felt happy.`;
-story = `Put yourself in an all English speaking environment where you can learn passively. 
+story = `Put yourself in an all English speaking environment where you can learn passively.
 The best way to learn is through speaking. Practise every day.
 Practise the 4 core skills: reading, writing, speaking and listening`;
 
@@ -64,7 +64,6 @@ function delCallBack(data, opcode) {
             speechHelper.abortSpeechRecognition();
         });
     }
-
 }
 
 //btnAudioControl.addEventListener('click', () => {
@@ -122,8 +121,8 @@ $(document).ready(function() {
     //content
 
     //story
-    //$("#parent").append('<div id = "newElement">A ' 
-    //+ 'Computer Science portal for geeks</div>'); 
+    //$("#parent").append('<div id = "newElement">A '
+    //+ 'Computer Science portal for geeks</div>');
     $.getJSON('/audio/SheebutheSheep_1.json', function(syncData) {
         syncData.fragments.forEach((data) => {
             let text = data.lines[0];
