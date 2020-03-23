@@ -1,3 +1,4 @@
+import {TextHelper} from './texthelper';
 declare var diffString: any;
 declare var soundex: any;
 
@@ -23,6 +24,8 @@ export class TextComparer {
   }
 
   public getPostProcessedOmitedTexts(sourceText: string, spokenText: string): string[] {
+    sourceText = TextHelper.cleanText(sourceText);
+    spokenText = TextHelper.cleanText(spokenText);
     let  diffText = this.diffTexts(sourceText, spokenText);
     diffText = this.postProcessDiffResult(diffText);
     const omittedWords = this.getOmitedTexts(diffText);
@@ -45,9 +48,10 @@ export class TextComparer {
       return diffNew;
   }
 
-  public getAssessmentStats(message) {
+  public getTextCompareStats(sourceText: string, spokenText: string) {
       let deletedWords = 0;
       let insertedWords = 0;
+      const message = this.diffTexts(sourceText, spokenText);
       try {
           deletedWords = message.match(this.delPatteren).length;
           insertedWords = message.match(this.insPatteren).length;

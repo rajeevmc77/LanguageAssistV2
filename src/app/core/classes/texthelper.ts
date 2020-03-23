@@ -1,6 +1,6 @@
 export class TextHelper {
 
-  public cleanText(message) {
+  public static cleanText(message) {
     try {
         const pattern = /[^A-Za-z0-9\s]/g;
         message = message.replace(pattern, '').toLowerCase();
