@@ -6,6 +6,7 @@
 }
 
 .container {
+    width: 200px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -20,8 +21,16 @@
 
 .row {
     display: flex;
+    border-bottom-style: solid;
+    border-color: blue;
+    border-width: 1px;
 }
 
 .column {
     flex: 50%;
+}
+
+.accuracy {
+    font-weight: bold;
+    color: navy;
 }
