@@ -29,7 +29,7 @@ export class AppComponent implements AfterViewInit {
     this.message = `I am Rajeev. This is my test application to support the kids to learn English.`;
 
     this.originalText = this.message;
-    this.spokenText = 'I am Rajiv. This is my sample application to help study English.';
+    this.spokenText = 'I am Rajesh. This is my sample application to help study English.';
   }
   ngAfterViewInit(): void {
     //  throw new Error("Method not implemented.");

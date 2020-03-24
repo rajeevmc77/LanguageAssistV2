@@ -48,16 +48,52 @@ export class TextComparer {
       return diffNew;
   }
 
+  private postProcessDiffStatus(diff) {
+    const diffstats = [];
+    let delStringSound;
+    let insStringSound;
+    let matchPercetage = 0;
+    const matches = diff.matchAll(this.postProcessPatteren);
+    try {
+        for (const match of matches) {
+            const { delString, insString } = match.groups;
+            delStringSound = soundex(delString);
+            insStringSound = soundex(insString);
+            matchPercetage = 0;
+            if ( delStringSound === insStringSound) {
+              continue;
+            }
+            // tslint:disable-next-line: prefer-for-of
+            for ( let delIndex = 0, insIndex = 0; delIndex < delStringSound.length && insIndex < insStringSound.length;
+              delIndex++, insIndex++ ) {
+                if ( delStringSound[delIndex] === insStringSound[insIndex] ) {
+                  matchPercetage++;
+                }
+            }
+            matchPercetage = matchPercetage / 4 ;
+            diffstats.push({'word': delString, 'match': matchPercetage});
+        }
+    } catch (exp) {
+        console.log(exp.message);
+    }
+    return diffstats;
+}
+
   public getTextCompareStats(sourceText: string, spokenText: string) {
       let deletedWords = 0;
       let insertedWords = 0;
-      const message = this.diffTexts(sourceText, spokenText);
+      let matchingSounds ;
+      sourceText = TextHelper.cleanText(sourceText);
+      spokenText = TextHelper.cleanText(spokenText);
+      let message = this.diffTexts(sourceText, spokenText);
+      message = this.postProcessDiffResult(message);
       try {
           deletedWords = message.match(this.delPatteren).length;
           insertedWords = message.match(this.insPatteren).length;
+          matchingSounds = this.postProcessDiffStatus(message);
       } catch (exp) {
           console.log(exp.message);
       }
-      return { DeletedWords: deletedWords, Insertedwords: insertedWords };
+      return { DeletedWords: deletedWords, Insertedwords: insertedWords, MatchingSounds : matchingSounds };
   }
 }
