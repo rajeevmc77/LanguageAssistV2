@@ -1,6 +1,4 @@
 <div [innerHTML]="speechDiffString"></div>
 <div>
-    <ul>
-        <li *ngFor="let words of speechOmitedWords">{{ words }}</li>
-    </ul>
+    <div *ngFor="let words of speechOmitedWords">{{ words }}</div>
 </div>
