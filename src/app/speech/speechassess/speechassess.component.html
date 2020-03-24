@@ -1,8 +1,28 @@
 <!-- <p> {{speechStats | json}}</p> -->
 <div class="heading"> Stats</div>
 <div class="container">
-    <div class="item">OriginalWords : {{speechStats?.OriginalWords}}</div>
-    <div class="item">DeletedWords : {{speechStats?.DeletedWords}}</div>
-    <div class="item">Insertedwords : {{speechStats?.Insertedwords}}</div>
-    <div class="item">Accuracy : {{ speechStats?.Accuracy | number : '2.2-2'}} </div>
+    <div class="item">
+        <div class="row">
+            <div class="column">Original Words</div>
+            <div class="colu">{{speechStats?.OriginalWords}}</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="row">
+            <div class="column">Deleted Words</div>
+            <div class="colu">{{speechStats?.DeletedWords}}</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="row">
+            <div class="column">New Words</div>
+            <div class="colu">{{speechStats?.Insertedwords}}</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="row">
+            <div class="column">Accuracy</div>
+            <div class="colu">{{speechStats?.Accuracy | number : '2.2-2'}}</div>
+        </div>
+    </div>
 </div>
