@@ -22,7 +22,7 @@ export class SpeechreviewComponent implements OnInit {
 
   public compareText() {
     this.speechDiffString = this.textComparer.processDiff(this.originalText, this.spokenText);
-    this.speechOmitedWords = this.textComparer.getDiffTextOmitedWords(this.originalText,
+    this.speechOmitedWords = this.textComparer.getOmitedTexts(this.originalText,
                 this.spokenText).join(' ');
     // this.rootElement.nativeElement.innerHTML = this.speechDiffString ;
   }

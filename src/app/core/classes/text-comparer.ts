@@ -28,13 +28,7 @@ export class TextComparer {
     return diffString(sourceText, spokenText);
   }
 
-  private getOmitedTexts(diffText: string): string[] {
-    const array = [...diffText['matchAll'](this.delPatteren)];
-    const omittedWords = array.map((item) => item[1]);
-    return omittedWords;
-  }
-
-  private postProcessDiffStatus(diff) {
+  private processDiffStatus(diff) {
     const diffstats = [];
     let delStringSound;
     let insStringSound;
@@ -65,9 +59,10 @@ export class TextComparer {
     return diffstats;
   }
 
-  public getDiffTextOmitedWords(sourceText: string, spokenText: string): string[] {
+  public getOmitedTexts(sourceText: string, spokenText: string): string[] {
     const diffText = this.processDiff(sourceText, spokenText);
-    const omittedWords = this.getOmitedTexts(diffText);
+    const array = [...diffText['matchAll'](this.delPatteren)];
+    const omittedWords = array.map((item) => item[1]);
     return omittedWords;
   }
 
@@ -99,7 +94,7 @@ export class TextComparer {
     try {
         deletedWords = message.match(this.delPatteren).length;
         insertedWords = message.match(this.insPatteren).length;
-        matchingSounds = this.postProcessDiffStatus(message);
+        matchingSounds = this.processDiffStatus(message);
         const matchingSoundsSum = matchingSounds
                                   .map(item => item.match)
                                   .reduce((tot, item) => tot + item);
