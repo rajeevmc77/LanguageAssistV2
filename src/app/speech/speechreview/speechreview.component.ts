@@ -13,7 +13,7 @@ export class SpeechreviewComponent implements OnInit {
   @Input()
   spokenText: string;
   public speechDiffString: string;
-  public speechOmitedWords: string;
+  public speechOmitedWords;
 
 
   constructor(private rootElement: ElementRef) {
@@ -22,8 +22,7 @@ export class SpeechreviewComponent implements OnInit {
 
   public compareText() {
     this.speechDiffString = this.textComparer.processDiff(this.originalText, this.spokenText);
-    this.speechOmitedWords = this.textComparer.getOmitedTexts(this.originalText,
-                this.spokenText).join(' ');
+    this.speechOmitedWords = this.textComparer.getOmitedTexts(this.originalText, this.spokenText);
     // this.rootElement.nativeElement.innerHTML = this.speechDiffString ;
   }
 
