@@ -2,8 +2,7 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import {SpeakerComponent} from './speech/speaker/speaker.component';
 import {SpeechreviewComponent} from './speech/speechreview/speechreview.component';
 import { AudioPlayer } from './core/classes/audioplayer';
-
-declare var diffString: any;
+import { SpeechassessComponent } from './speech/speechassess/speechassess.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +15,8 @@ export class AppComponent implements AfterViewInit {
   speakerObj: SpeakerComponent;
   @ViewChild ('speachReview', { read: SpeechreviewComponent, static: true} )
   speachReviewObj: SpeechreviewComponent;
+  @ViewChild ('speachAssess', { read: SpeechassessComponent, static: true} )
+  speachAssessObj: SpeechassessComponent;
 
   private audioPlayer: AudioPlayer;
   public isPlaying: boolean;
@@ -29,7 +30,7 @@ export class AppComponent implements AfterViewInit {
     this.message = `I am Rajeev. This is my test application to support the kids to learn English.`;
 
     this.originalText = this.message;
-    this.spokenText = 'I am Rajesh. This is my sample application to help study English.';
+    this.spokenText = 'I am Rajiv. This is my sample application to help study English.';
   }
   ngAfterViewInit(): void {
     //  throw new Error("Method not implemented.");
@@ -38,6 +39,7 @@ export class AppComponent implements AfterViewInit {
   public diffText() {
     try {
       this.speachReviewObj.compareText();
+      this.speachAssessObj.assessTexts();
     } catch (exp) {
       console.log(exp.message);
     }

@@ -1,3 +1,8 @@
-<p>
+<!-- <p> {{speechStats | json}}</p> -->
 
-</p>
+<div class="Assessment">
+    <div class="OriginalWords">OriginalWords : {{speechStats?.OriginalWords}}</div>
+    <div class="DeletedWords">DeletedWords: {{speechStats?.DeletedWords}}</div>
+    <div class="Insertedwords">Insertedwords: {{speechStats?.Insertedwords}}</div>
+    <div class="Accuracy">Accuracy: {{ speechStats?.Accuracy | number : '2.2-2'}} </div>
+</div>

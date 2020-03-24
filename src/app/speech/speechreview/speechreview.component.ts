@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
-import {TextComparer} from '../../core/classes/text-comparer';
+import {TextComparer, TextCompareStats} from '../../core/classes/text-comparer';
 
 @Component({
   selector: 'app-speechreview',
@@ -13,18 +13,17 @@ export class SpeechreviewComponent implements OnInit {
   @Input()
   spokenText: string;
   public speechDiffString: string;
-  public speechPostProcesseedDiffString: string;
-  public speechStats: any;
+  public speechOmitedWords: string;
+
 
   constructor(private rootElement: ElementRef) {
     this.textComparer = new  TextComparer();
   }
 
   public compareText() {
-    this.speechDiffString = this.textComparer.diffTexts(this.originalText, this.spokenText);
-    this.speechPostProcesseedDiffString = this.textComparer.getPostProcessedOmitedTexts(this.originalText,
+    this.speechDiffString = this.textComparer.processDiff(this.originalText, this.spokenText);
+    this.speechOmitedWords = this.textComparer.getDiffTextOmitedWords(this.originalText,
                 this.spokenText).join(' ');
-    this.speechStats = this.textComparer.getTextCompareStats(this.originalText, this.spokenText);
     // this.rootElement.nativeElement.innerHTML = this.speechDiffString ;
   }
 
