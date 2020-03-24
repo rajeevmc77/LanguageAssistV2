@@ -82,10 +82,12 @@ export class TextComparer {
   public getTextCompareStats(sourceText: string, spokenText: string) {
       let deletedWords = 0;
       let insertedWords = 0;
+      let originalWords = 0;
       let matchingSounds ;
       sourceText = TextHelper.cleanText(sourceText);
       spokenText = TextHelper.cleanText(spokenText);
       let message = this.diffTexts(sourceText, spokenText);
+      originalWords = sourceText.split(' ').length;
       message = this.postProcessDiffResult(message);
       try {
           deletedWords = message.match(this.delPatteren).length;
@@ -94,6 +96,7 @@ export class TextComparer {
       } catch (exp) {
           console.log(exp.message);
       }
-      return { DeletedWords: deletedWords, Insertedwords: insertedWords, MatchingSounds : matchingSounds };
+
+      return { OriginalWords: originalWords, DeletedWords: deletedWords, Insertedwords: insertedWords, MatchingSounds : matchingSounds };
   }
 }
