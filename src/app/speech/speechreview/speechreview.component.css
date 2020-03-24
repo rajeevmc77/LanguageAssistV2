@@ -5,3 +5,22 @@
 :host ::ng-deep ins {
     color: blue;
 }
+
+.omitedWords {
+    color: blue;
+    text-decoration: dotted;
+    padding-left: 5em;
+}
+
+.wordsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.heading {
+    font-weight: bold;
+    font-size: 1.25em;
+    text-decoration: underline;
+    text-align: center;
+}

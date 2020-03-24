@@ -1,4 +1,7 @@
 <div [innerHTML]="speechDiffString"></div>
 <div>
-    <div *ngFor="let words of speechOmitedWords">{{ words }}</div>
+    <div class="heading"> Words to Learn </div>
+    <div class="wordsContainer">
+        <div class="omitedWords" *ngFor="let words of speechOmitedWords">{{ words }}</div>
+    </div>
 </div>
