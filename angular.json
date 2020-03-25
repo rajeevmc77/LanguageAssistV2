@@ -27,7 +27,7 @@
                         ],
                         "styles": [
                             "src/styles.css",
-                            "src/styles/font-awesome-4.7.0/css/font-awesome.min.css"
+                            "src/styles/fontawesome/css/all.css"
                         ],
                         "scripts": [
                             "src/scripts/jsdiff.js",

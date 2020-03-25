@@ -3,10 +3,12 @@
     <div class="container">
         <div class="heading"> Learn Words </div>
         <div> ( Missing Words ) </div>
+
         <div class="wordsContainer">
             <div class="omitedWords" *ngFor="let word of speechOmitedWords">
-                <i class="fa fa-microphone" aria-hidden="true "></i> {{ word }}
-                <i class="fa fa-volume-up" aria-hidden="true" (click)="speak(word)"></i>
+                <i class="fa fa-microphone-slash" aria-hidden="true" (click)="record()"></i>
+                <i class="fa fa-sync" aria-hidden="true"></i> {{ word }}
+                <i class="fa fa-volume-up" aria-hidden="true" (click)="speak(word)" *ngIf="isRecording"></i>
             </div>
         </div>
     </div>

@@ -16,11 +16,13 @@ export class SpeechreviewComponent implements OnInit {
   public speechDiffString: string;
   public speechOmitedWords;
   private speech;
+  public isRecording: boolean;
 
 
   constructor(private rootElement: ElementRef) {
     this.textComparer = new  TextComparer();
     this.speech = new Speechsynthesizer();
+    this.isRecording = false;
   }
 
   public compareText() {
@@ -31,6 +33,10 @@ export class SpeechreviewComponent implements OnInit {
 
   public speak(message) {
     this.speech.speak(message);
+  }
+
+  public record() {
+    this.isRecording = true;
   }
 
   ngOnInit(): void {
