@@ -1,7 +1,13 @@
 <div [innerHTML]="speechDiffString"></div>
 <div>
-    <div class="heading"> Words to Learn </div>
-    <div class="wordsContainer">
-        <div class="omitedWords" *ngFor="let words of speechOmitedWords">{{ words }}</div>
+    <div class="container">
+        <div class="heading"> Learn Words </div>
+        <div> ( Missing Words ) </div>
+        <div class="wordsContainer">
+            <div class="omitedWords" *ngFor="let word of speechOmitedWords">
+                <i class="fa fa-microphone" aria-hidden="true "></i> {{ word }}
+                <i class="fa fa-volume-up" aria-hidden="true" (click)="speak(word)"></i>
+            </div>
+        </div>
     </div>
 </div>
