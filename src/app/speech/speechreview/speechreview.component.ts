@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, NgZone } from '@angular/core';
 import {TextComparer, TextCompareStats} from '../../core/classes/text-comparer';
 import {Speechsynthesizer} from '../../core/classes/speechsynthesizer';
+import {SpeechRecogniser} from '../../core/classes/speechrecogniser';
 
 @Component({
   selector: 'app-speechreview',
@@ -16,12 +17,16 @@ export class SpeechreviewComponent implements OnInit {
   public speechDiffString: string;
   public speechOmitedWords;
   private speech;
+  private recorder;
   public isRecording: boolean;
+  public textMatch;
+  public currentWord;
 
 
-  constructor(private rootElement: ElementRef) {
+  constructor(private rootElement: ElementRef, private zone: NgZone) {
     this.textComparer = new  TextComparer();
     this.speech = new Speechsynthesizer();
+    this.recorder = new SpeechRecogniser();
     this.isRecording = false;
   }
 
@@ -35,8 +40,24 @@ export class SpeechreviewComponent implements OnInit {
     this.speech.speak(message);
   }
 
-  public record() {
-    this.isRecording = true;
+  public record(word) {
+    this.isRecording = !this.isRecording;
+    this.currentWord = word;
+    try {
+        if ( this.isRecording) {
+          this.recorder.startListening().subscribe((resp) => {
+            console.log(resp);
+            this.zone.run(() => { this.textMatch = this.textComparer.matchTexts(resp, word); this.isRecording = false; });
+          },
+          () => { this.zone.run(() => { this.isRecording = false; }); },
+          () => { this.zone.run(() => { this.isRecording = false; }); }
+          );
+        } else {
+          this.recorder.stopListening();
+        }
+    } catch (exp) {
+      console.log(exp.message);
+    }
   }
 
   ngOnInit(): void {

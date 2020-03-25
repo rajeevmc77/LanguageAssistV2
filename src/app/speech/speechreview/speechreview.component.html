@@ -6,9 +6,11 @@
 
         <div class="wordsContainer">
             <div class="omitedWords" *ngFor="let word of speechOmitedWords">
-                <i class="fa fa-microphone-slash" aria-hidden="true" (click)="record()"></i>
-                <i class="fa fa-sync" aria-hidden="true"></i> {{ word }}
-                <i class="fa fa-volume-up" aria-hidden="true" (click)="speak(word)" *ngIf="isRecording"></i>
+                <i class="fa" [ngClass]="{'fa-microphone-slash': isRecording, 'fa-microphone': !isRecording}" aria-hidden="true" (click)="record(word)"></i>
+                <!-- <i class="fa fa-microphone" aria-hidden="true" (click)="record()"></i> -->
+                <i class="fa fa-circle-notch fa-spin" aria-hidden="true" *ngIf="isRecording"></i>
+                <span *ngIf="currentWord === word"> {{textMatch}} </span> {{ word }}
+                <i class="fa fa-volume-up" aria-hidden="true" (click)="speak(word)"></i>
             </div>
         </div>
     </div>
