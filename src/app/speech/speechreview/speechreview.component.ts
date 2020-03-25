@@ -19,8 +19,9 @@ export class SpeechreviewComponent implements OnInit {
   private speech;
   private recorder;
   public isRecording: boolean;
-  public textMatch;
   public currentWord;
+  public progressIndicator;
+  public progressIndicatorText;
 
 
   constructor(private rootElement: ElementRef, private zone: NgZone) {
@@ -28,6 +29,7 @@ export class SpeechreviewComponent implements OnInit {
     this.speech = new Speechsynthesizer();
     this.recorder = new SpeechRecogniser();
     this.isRecording = false;
+    this.progressIndicator = 0;
   }
 
   public compareText() {
@@ -41,13 +43,18 @@ export class SpeechreviewComponent implements OnInit {
   }
 
   public record(word) {
+    this.progressIndicator = -1;
+    this.progressIndicatorText = '';
     this.isRecording = !this.isRecording;
     this.currentWord = word;
     try {
         if ( this.isRecording) {
           this.recorder.startListening().subscribe((resp) => {
             console.log(resp);
-            this.zone.run(() => { this.textMatch = this.textComparer.matchTexts(resp, word); this.isRecording = false; });
+            this.zone.run(() => { this.progressIndicator = this.textComparer.getTextsMatch(resp, word);
+                                  this.isRecording = false;
+                                  this.progressIndicatorText = `${this.progressIndicator * 25}%`;
+                                });
           },
           () => { this.zone.run(() => { this.isRecording = false; }); },
           () => { this.zone.run(() => { this.isRecording = false; }); }

@@ -7,12 +7,19 @@
             <div *ngFor="let word of speechOmitedWords">
                 <div class="omitedWords">
                     <i class="fa" [ngClass]="{'fa-microphone-slash': isRecording, 'fa-microphone': !isRecording}" aria-hidden="true" (click)="record(word)"></i>
-                    <i class="fa fa-circle-notch fa-spin" aria-hidden="true" *ngIf="isRecording"></i>
-                    <div>
-                        <span>{{ word }}</span>
-                        <div class="progress" *ngIf="word === currentWord"></div>
-                    </div>
+                    <i class="fa fa-circle-notch fa-spin" aria-hidden="true" *ngIf="isRecording && word === currentWord"></i>
+                    <span>{{ word }}</span>
                     <i class="fa fa-volume-up" aria-hidden="true" (click)="speak(word)"></i>
+                    <div>
+                        <span *ngIf="word === currentWord"> {{progressIndicatorText}}</span>
+                        <div [ngClass]="{'progress': progressIndicator == -1 ,
+                                        'progressRed': progressIndicator == 0 ,
+                                        'progressOrange': progressIndicator == 1,
+                                        'progressYellow': progressIndicator == 2,
+                                        'progressGreen': progressIndicator >= 3
+                                        }" *ngIf="word === currentWord">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

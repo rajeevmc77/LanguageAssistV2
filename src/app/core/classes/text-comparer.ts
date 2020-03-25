@@ -59,12 +59,12 @@ export class TextComparer {
     return diffstats;
   }
 
-  public matchTexts(sourceText: string, targetText: string ) {
+  public getTextsMatch(sourceText: string, targetText: string ) {
     sourceText = soundex(sourceText);
     targetText = soundex(targetText);
     let matchPercetage = 0;
     if ( sourceText === targetText) {
-      matchPercetage = 100;
+      matchPercetage = 4;
     } else {
       // tslint:disable-next-line: prefer-for-of
       for ( let srcIndex = 0, tgtIndex = 0; srcIndex < sourceText.length && tgtIndex < targetText.length;
@@ -73,7 +73,6 @@ export class TextComparer {
             matchPercetage++;
           }
       }
-      matchPercetage = (matchPercetage / sourceText.length) * 100 ;
     }
     return matchPercetage;
   }
