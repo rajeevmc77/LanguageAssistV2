@@ -9,6 +9,7 @@ export class SpeechRecogniser {
   constructor() {
     try {
       this.recognition = new SpeechRecognition();
+      this.recognition.maxAlternatives = 5;
     } catch (exp) {
       console.log(exp.message);
     }
@@ -19,12 +20,16 @@ export class SpeechRecogniser {
     }
     const speechStream = new  Observable( (obs) => {
       this.recognition.onresult = (resp: any) => {
-        let spokenText = ' ';
+        let spokenText;
         if ( 'results' in resp) {
           spokenText = Array.from(resp.results)
                       .map(result => result[0])
                       .map(result => result.transcript)
                       .join('');
+          let texts = Array.from(resp.results[0]);
+          texts = texts.map( (result: any) => {
+                        return {transcript: result.transcript, confidence: result.confidence }; });
+          spokenText = { transcript : spokenText, altTranscripts: texts };
         }
         obs.next(spokenText);
       };

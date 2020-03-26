@@ -50,8 +50,12 @@ export class SpeechreviewComponent implements OnInit {
     try {
         if ( this.isRecording) {
           this.recorder.startListening().subscribe((resp) => {
-            console.log(resp);
-            this.zone.run(() => { this.progressIndicator = this.textComparer.getTextsMatch(resp, word);
+            let spokenWord = ' ';
+            if ( resp) {
+              spokenWord = resp.transcript;
+              console.log(resp.altTranscripts);
+            }
+            this.zone.run(() => { this.progressIndicator = this.textComparer.getTextsMatch(spokenWord, word);
                                   this.isRecording = false;
                                   this.progressIndicatorText = `${this.progressIndicator * 25}%`;
                                 });

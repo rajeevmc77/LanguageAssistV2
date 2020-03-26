@@ -30,7 +30,11 @@ export class RecorderComponent implements OnInit {
     if (speechResp) {
       speechResp.subscribe(
         (resp: any ) => {
-          this.zone.run(() => { this.spokenText = resp; this.isListening = false; } );
+          let spokenWord = ' ';
+          if (resp) {
+            spokenWord = resp.transcript;
+          }
+          this.zone.run(() => { this.spokenText = spokenWord; this.isListening = false; } );
         },
         (err: any) => {
           this.zone.run(() => { this.errorMessage = err.message; this.isListening = false; });

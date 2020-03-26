@@ -10,7 +10,7 @@ import { SpeechassessComponent } from './speech/speechassess/speechassess.compon
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
-  public message: string;
+
   @ViewChild ('speaker', { read: SpeakerComponent, static: true} )
   speakerObj: SpeakerComponent;
   @ViewChild ('speachReview', { read: SpeechreviewComponent, static: true} )
@@ -22,14 +22,21 @@ export class AppComponent implements AfterViewInit {
   public isPlaying: boolean;
   public originalText: string;
   public spokenText: string;
+  public story: string;
 
   constructor() {
     this.isPlaying = false;
     this.audioPlayer = new AudioPlayer();
 
-    this.message = `I am Rajeev. This is my test application to support the kids to learn English.`;
+    this.story = `Sheebu was a sheep.
+                  One day she found a bell.
+                  She thought to herself 'Wow! What a tingle-jingle bell.
+                  I will wear this bell.'
+                  She hung it around her neck.
+                  Seeing the bell her friends asked, "Sheebu, what a lovely bell you have."
+                  Sheebu felt happy.`;
 
-    this.originalText = this.message;
+    this.originalText = this.story;
     this.spokenText = 'I am Rajiv. This is my sample application to help study English.';
   }
   ngAfterViewInit(): void {
