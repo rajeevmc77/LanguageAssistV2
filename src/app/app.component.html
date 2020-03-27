@@ -7,6 +7,9 @@
                 <p> {{story}} </p>
             </div>
         </div>
+        <div>
+            <app-recorder #recorder (completed)="recordCompleted($event)"> </app-recorder>
+        </div>
     </div>
     <div class="story-review">
 
@@ -15,6 +18,5 @@
 
     </div>
     <div class="learning">
-
     </div>
 </div>

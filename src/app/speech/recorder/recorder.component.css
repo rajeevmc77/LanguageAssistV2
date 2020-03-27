@@ -2,6 +2,29 @@ body {
     font-size: 15px;
 }
 
+.container {
+    width: 100%;
+    display: flex;
+    /* display: grid; */
+    flex-direction: row;
+    /* grid-template-columns: 7em repeat(auto-fit, minmax(25rem, 1fr)); */
+    align-items: left;
+    justify-content: left;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.spokenBox {
+    border: 2px blue solid;
+}
+
+.recordControl {
+    flex-shrink: 0
+}
+
 .google-microphone {
     width: 5em;
     height: 5em;

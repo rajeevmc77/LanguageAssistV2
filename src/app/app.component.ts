@@ -3,6 +3,7 @@ import {SpeakerComponent} from './speech/speaker/speaker.component';
 import {SpeechreviewComponent} from './speech/speechreview/speechreview.component';
 import { AudioPlayer } from './core/classes/audioplayer';
 import { SpeechassessComponent } from './speech/speechassess/speechassess.component';
+import { RecorderComponent } from './speech/recorder/recorder.component';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ import { SpeechassessComponent } from './speech/speechassess/speechassess.compon
 })
 export class AppComponent implements AfterViewInit {
 
+  @ViewChild ('recorder', { read: RecorderComponent, static: true} )
+  recorderObj: RecorderComponent;
   @ViewChild ('speaker', { read: SpeakerComponent, static: true} )
   speakerObj: SpeakerComponent;
   @ViewChild ('speachReview', { read: SpeechreviewComponent, static: true} )
@@ -23,6 +26,7 @@ export class AppComponent implements AfterViewInit {
   public originalText: string;
   public spokenText: string;
   public story: string;
+  msg: any;
 
   constructor() {
     this.isPlaying = false;
@@ -36,11 +40,16 @@ export class AppComponent implements AfterViewInit {
                   Seeing the bell her friends asked, "Sheebu, what a lovely bell you have."
                   Sheebu felt happy.`;
 
-    this.originalText = this.story;
-    this.spokenText = 'I am Rajiv. This is my sample application to help study English.';
+    // this.originalText = this.story;
+    // this.spokenText = 'I am Rajiv. This is my sample application to help study English.';
   }
   ngAfterViewInit(): void {
     //  throw new Error("Method not implemented.");
+  }
+
+
+  public recordCompleted(msg) {
+    console.log(msg);
   }
 
   public diffText() {
@@ -69,6 +78,8 @@ export class AppComponent implements AfterViewInit {
   public playAudioFragment() {
     this.audioPlayer.playForDuration(10, 20);
   }
+
+
 
 }
 

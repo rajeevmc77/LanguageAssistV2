@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
 import {SpeechRecogniser} from '../../core/classes/speechrecogniser';
 
 @Component({
@@ -9,23 +9,25 @@ import {SpeechRecogniser} from '../../core/classes/speechrecogniser';
 
 export class RecorderComponent implements OnInit {
 
+  @Output() public completed = new EventEmitter<string>();
+
   speechListener: SpeechRecogniser;
-  spokenText = 'Say Something!';
-  errorMessage = '';
+  spokenText = ' ';
+  errorMessage;
   isListening = false;
 //
   constructor(private zone: NgZone) {
     this.speechListener = new SpeechRecogniser();
   }
 
-  listen(event: any) {
+  startListening() {
     // event.target.disabled = true;
     this.isListening = !this.isListening;
     let speechResp;
     if ( this.isListening) {
-       speechResp = this.speechListener.startListening();
+        speechResp = this.speechListener.startListening();
     } else {
-      this.speechListener.stopListening();
+       this.speechListener.stopListening();
     }
     if (speechResp) {
       speechResp.subscribe(
@@ -34,14 +36,25 @@ export class RecorderComponent implements OnInit {
           if (resp) {
             spokenWord = resp.transcript;
           }
-          this.zone.run(() => { this.spokenText = spokenWord; this.isListening = false; } );
+          this.zone.run(() => {
+            this.spokenText = spokenWord;
+            this.isListening = false;
+            this.completed.emit(spokenWord);
+          } );
         },
         (err: any) => {
-          this.zone.run(() => { this.errorMessage = err.message; this.isListening = false; });
+          this.zone.run(() => {
+            this.errorMessage = err.message;
+            this.isListening = false;
+            this.completed.emit('');
+           });
         },
         () => {
-          this.isListening = false;
-          this.zone.run(() => { this.isListening = false; });
+          // this.isListening = false;
+          this.zone.run(() => {
+            this.isListening = false;
+            this.completed.emit('');
+          });
         }
       );
     }

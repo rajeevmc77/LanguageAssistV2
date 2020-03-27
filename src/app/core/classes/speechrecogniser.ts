@@ -18,36 +18,37 @@ export class SpeechRecogniser {
     if (!this.recognition) {
       throw new Error('speech recognition not supported');
     }
-    const speechStream = new  Observable( (obs) => {
-      this.recognition.onresult = (resp: any) => {
-        let spokenText;
-        if ( 'results' in resp) {
-          spokenText = Array.from(resp.results)
-                      .map(result => result[0])
-                      .map(result => result.transcript)
-                      .join('');
-          let texts = Array.from(resp.results[0]);
-          texts = texts.map( (result: any) => {
-                        return {transcript: result.transcript, confidence: result.confidence }; });
-          spokenText = { transcript : spokenText, altTranscripts: texts };
-        }
-        obs.next(spokenText);
-      };
-      this.recognition.onerror = (err: any) => {
-        obs.error(err);
-      };
-      this.recognition.onend = (e: any) => {
-        obs.complete();
-      };
-      return () => {
-        this.recognition.stop();
-      };
-    });
     try {
+      const speechStream = new  Observable( (obs) => {
+        this.recognition.onresult = (resp: any) => {
+          let spokenText;
+          if ( 'results' in resp) {
+            spokenText = Array.from(resp.results)
+                        .map(result => result[0])
+                        .map(result => result.transcript)
+                        .join('');
+            let texts = Array.from(resp.results[0]);
+            texts = texts.map( (result: any) => {
+                          return {transcript: result.transcript, confidence: result.confidence }; });
+            spokenText = { transcript : spokenText, altTranscripts: texts };
+          }
+          obs.next(spokenText);
+        };
+        this.recognition.onerror = (err: any) => {
+          obs.error(err);
+        };
+        this.recognition.onend = (e: any) => {
+          obs.complete();
+        };
+        return () => {
+          this.recognition.stop();
+        };
+      });
       this.recognition.start();
       return speechStream;
     } catch (exp) {
       this.recognition.stop();
+      console.log(exp.message);
     }
   }
 
