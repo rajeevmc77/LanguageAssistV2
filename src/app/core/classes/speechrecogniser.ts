@@ -3,24 +3,34 @@ import { Observable } from 'rxjs';
 const SpeechRecognition  =  window['SpeechRecognition'] || window['webkitSpeechRecognition'] ||
                             window['mozSpeechRecognition'] || window['msSpeechRecognition'] ||
                             window['oSpeechRecognition'];
+enum Mode {
+    Listening,
+    Stop,
+    Stopped
+}
 
 export class SpeechRecogniser {
   private recognition: any ;
+  private mode: Mode;
+  spokenObj;
   constructor() {
     try {
       this.recognition = new SpeechRecognition();
       this.recognition.maxAlternatives = 5;
+      this.recognition.interimResults = true;
     } catch (exp) {
       console.log(exp.message);
     }
   }
   public startListening() {
+    const self = this;
+    this.mode = Mode.Listening;
     if (!this.recognition) {
       throw new Error('speech recognition not supported');
     }
     try {
       const speechStream = new  Observable( (obs) => {
-        this.recognition.onresult = (resp: any) => {
+        self.recognition.onresult = (resp: any) => {
           let spokenText;
           if ( 'results' in resp) {
             spokenText = Array.from(resp.results)
@@ -30,29 +40,41 @@ export class SpeechRecogniser {
             let texts = Array.from(resp.results[0]);
             texts = texts.map( (result: any) => {
                           return {transcript: result.transcript, confidence: result.confidence }; });
-            spokenText = { transcript : spokenText, altTranscripts: texts };
+            self.spokenObj = { transcript : spokenText, altTranscripts: texts };
           }
-          obs.next(spokenText);
+          obs.next(self.spokenObj);
         };
-        this.recognition.onerror = (err: any) => {
+        self.recognition.onerror = (err: any) => {
           obs.error(err);
+          if ( self.mode === Mode.Listening) {
+            try {
+              self.recognition.stop();
+            } catch ( exp) {
+              console.log(exp.message);
+            }
+          }
         };
-        this.recognition.onend = (e: any) => {
-          obs.complete();
+        self.recognition.onend = (e: any) => {
+          if ( self.mode === Mode.Listening) {
+            self.recognition.start();
+            console.log('restarted listening', (self.spokenObj) ? self.spokenObj.transcript : ' ' );
+          }
+          // obs.complete();
         };
         return () => {
-          this.recognition.stop();
+          self.recognition.stop();
         };
       });
-      this.recognition.start();
+      self.recognition.start();
       return speechStream;
     } catch (exp) {
-      this.recognition.stop();
+      self.recognition.stop();
       console.log(exp.message);
     }
   }
 
   public stopListening() {
+    this.mode = Mode.Stop;
     if (!this.recognition) {
       throw new Error('speech recognition not supported');
     }
@@ -61,6 +83,7 @@ export class SpeechRecogniser {
     } catch (exp) {
       this.recognition.stop();
     }
+    this.mode = Mode.Stopped;
   }
 
 }

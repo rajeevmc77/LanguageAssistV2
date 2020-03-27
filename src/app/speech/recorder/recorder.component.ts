@@ -12,7 +12,8 @@ export class RecorderComponent implements OnInit {
   @Output() public completed = new EventEmitter<string>();
 
   speechListener: SpeechRecogniser;
-  spokenText = ' ';
+  spokenStory = '';
+  spokenWord = ' ';
   errorMessage;
   isListening = false;
 //
@@ -21,7 +22,7 @@ export class RecorderComponent implements OnInit {
   }
 
   startListening() {
-    // event.target.disabled = true;
+    const self = this;
     this.isListening = !this.isListening;
     let speechResp;
     if ( this.isListening) {
@@ -30,32 +31,32 @@ export class RecorderComponent implements OnInit {
        this.speechListener.stopListening();
     }
     if (speechResp) {
-      speechResp.subscribe(
-        (resp: any ) => {
-          let spokenWord = ' ';
-          if (resp) {
-            spokenWord = resp.transcript;
-          }
+      speechResp.subscribe( {
+        next: (resp: any ) => {
           this.zone.run(() => {
-            this.spokenText = spokenWord;
-            this.isListening = false;
-            this.completed.emit(spokenWord);
+            this.spokenWord = (resp) ? resp.transcript : '';
+            // this.isListening = false;
+            this.completed.emit(this.spokenWord );
           } );
         },
-        (err: any) => {
+        error: (err: any) => {
           this.zone.run(() => {
             this.errorMessage = err.message;
-            this.isListening = false;
+            // this.isListening = false;
             this.completed.emit('');
            });
         },
-        () => {
+        complete: () => {
           // this.isListening = false;
           this.zone.run(() => {
-            this.isListening = false;
+            // this.isListening = false;
+            this.spokenStory = this.spokenStory + ' ' + this.spokenWord;
+            console.log('complete');
+            console.log(this.spokenStory);
             this.completed.emit('');
           });
         }
+      }
       );
     }
   }
