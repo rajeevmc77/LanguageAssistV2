@@ -45,7 +45,6 @@ export class RecorderComponent implements OnInit {
         error: (err: any) => {
           this.zone.run(() => {
             this.errorMessage = err.message;
-            // this.isListening = false;
             this.completed.emit('');
            });
         },

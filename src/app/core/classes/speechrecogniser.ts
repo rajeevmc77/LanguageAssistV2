@@ -57,7 +57,6 @@ export class SpeechRecogniser {
         self.recognition.onend = (e: any) => {
           if ( self.mode === Mode.Listening) {
             self.recognition.start();
-            console.log('restarted listening', (self.spokenObj) ? self.spokenObj.transcript : ' ' );
             self.spokenObj = { transcript : '', altTranscripts: '', event: 'end' };
             obs.next(self.spokenObj);
           } else {
