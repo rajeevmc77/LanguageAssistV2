@@ -50,7 +50,7 @@ export class RecorderComponent implements OnInit {
         complete: () => {
           this.zone.run(() => {
             this.spokenStory = this.spokenStory + ' ' + this.spokenWord;
-            this.completed.emit((this.spokenStory === '') ? this.spokenWord : this.spokenStory );
+            this.completed.emit(this.spokenStory  );
           });
         }
       }

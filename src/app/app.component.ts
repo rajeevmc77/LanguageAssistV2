@@ -50,7 +50,6 @@ export class AppComponent implements AfterViewInit {
 
   public recordCompleted(msg) {
     this.spokenStory = msg;
-    console.log(msg);
   }
 
   public diffText() {
