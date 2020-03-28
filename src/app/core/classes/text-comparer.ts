@@ -107,6 +107,8 @@ export class TextComparer {
     let originalWords = 0;
     let accuracy = 0;
     let matchingSounds ;
+    sourceText = TextHelper.cleanText(sourceText);
+    spokenText = TextHelper.cleanText(spokenText);
     const message = this.processDiff(sourceText, spokenText);
     originalWords = sourceText.split(' ').length;
     try {
