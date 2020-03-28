@@ -45,6 +45,7 @@ export class SpeechRecogniser {
           obs.next(self.spokenObj);
         };
         self.recognition.onerror = (err: any) => {
+          self.spokenObj.event = 'error' ;
           obs.error(err);
           if ( self.mode === Mode.Listening) {
             try {
@@ -57,7 +58,7 @@ export class SpeechRecogniser {
         self.recognition.onend = (e: any) => {
           if ( self.mode === Mode.Listening) {
             self.recognition.start();
-            self.spokenObj = { transcript : '', altTranscripts: '', event: 'end' };
+            self.spokenObj.event = 'end' ;
             obs.next(self.spokenObj);
           } else {
             obs.complete();

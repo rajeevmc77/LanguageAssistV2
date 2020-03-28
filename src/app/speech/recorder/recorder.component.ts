@@ -39,19 +39,18 @@ export class RecorderComponent implements OnInit {
             } else {
               this.spokenStory = this.spokenStory + ' ' + this.spokenWord;
             }
-            this.completed.emit(this.spokenStory );
+            this.completed.emit((this.spokenStory === '') ? this.spokenWord : this.spokenStory );
           } );
         },
         error: (err: any) => {
           this.zone.run(() => {
             this.errorMessage = err.message;
-            this.completed.emit('');
            });
         },
         complete: () => {
           this.zone.run(() => {
             this.spokenStory = this.spokenStory + ' ' + this.spokenWord;
-            this.completed.emit('');
+            this.completed.emit((this.spokenStory === '') ? this.spokenWord : this.spokenStory );
           });
         }
       }
