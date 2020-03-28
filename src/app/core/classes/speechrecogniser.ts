@@ -40,7 +40,7 @@ export class SpeechRecogniser {
             let texts = Array.from(resp.results[0]);
             texts = texts.map( (result: any) => {
                           return {transcript: result.transcript, confidence: result.confidence }; });
-            self.spokenObj = { transcript : spokenText, altTranscripts: texts };
+            self.spokenObj = { transcript : spokenText, altTranscripts: texts, event: 'result' };
           }
           obs.next(self.spokenObj);
         };
@@ -58,8 +58,11 @@ export class SpeechRecogniser {
           if ( self.mode === Mode.Listening) {
             self.recognition.start();
             console.log('restarted listening', (self.spokenObj) ? self.spokenObj.transcript : ' ' );
+            self.spokenObj = { transcript : '', altTranscripts: '', event: 'end' };
+            obs.next(self.spokenObj);
+          } else {
+            obs.complete();
           }
-          // obs.complete();
         };
         return () => {
           self.recognition.stop();

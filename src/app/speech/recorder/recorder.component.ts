@@ -34,8 +34,11 @@ export class RecorderComponent implements OnInit {
       speechResp.subscribe( {
         next: (resp: any ) => {
           this.zone.run(() => {
-            this.spokenWord = (resp) ? resp.transcript : '';
-            // this.isListening = false;
+            if ( resp.event === 'result') {
+              this.spokenWord = (resp) ? resp.transcript : '';
+            } else {
+              this.spokenStory = this.spokenStory + ' ' + this.spokenWord;
+            }
             this.completed.emit(this.spokenWord );
           } );
         },
@@ -47,12 +50,8 @@ export class RecorderComponent implements OnInit {
            });
         },
         complete: () => {
-          // this.isListening = false;
           this.zone.run(() => {
-            // this.isListening = false;
             this.spokenStory = this.spokenStory + ' ' + this.spokenWord;
-            console.log('complete');
-            console.log(this.spokenStory);
             this.completed.emit('');
           });
         }
