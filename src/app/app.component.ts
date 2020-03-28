@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit {
   private audioPlayer: AudioPlayer;
   public isPlaying: boolean;
   public originalText: string;
-  public spokenText: string;
+  public spokenStory: string;
   public story: string;
   msg: any;
 
@@ -49,7 +49,7 @@ export class AppComponent implements AfterViewInit {
 
 
   public recordCompleted(msg) {
-    console.log(msg);
+    this.spokenStory = msg;
   }
 
   public diffText() {

@@ -53,15 +53,22 @@ export class SpeechreviewComponent implements OnInit {
             let spokenWord = ' ';
             if ( resp) {
               spokenWord = resp.transcript;
-              console.log(resp.altTranscripts);
+              // console.log(resp.altTranscripts);
+              if ( resp.event === 'result') {
+                this.zone.run(() => {
+                  this.progressIndicator = this.textComparer.getTextsMatch(spokenWord, word);
+                  this.isRecording = false;
+                  this.progressIndicatorText = `${this.progressIndicator * 25}%`;
+                });
+              }
+              if ( resp.event === 'end') {
+                this.zone.run(() => { this.isRecording = false;  });
+                this.recorder.stopListening();
+              }
             }
-            this.zone.run(() => { this.progressIndicator = this.textComparer.getTextsMatch(spokenWord, word);
-                                  this.isRecording = false;
-                                  this.progressIndicatorText = `${this.progressIndicator * 25}%`;
-                                });
           },
-          () => { this.zone.run(() => { this.isRecording = false; }); },
-          () => { this.zone.run(() => { this.isRecording = false; }); }
+          (err: any) => { this.zone.run(() => { this.isRecording = false; this.recorder.stopListening(); }); },
+          () => { this.zone.run(() => { this.isRecording = false; }); this.recorder.stopListening(); }
           );
         } else {
           this.recorder.stopListening();
