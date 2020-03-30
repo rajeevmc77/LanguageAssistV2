@@ -78,6 +78,28 @@ export class SpeechreviewComponent implements OnInit {
     }
   }
 
+  getProgressIndicator() {
+    let color = 'white';
+    let height = 0;
+    switch (this.progressIndicator) {
+      case 1:
+        color = 'red';
+        break;
+      case 2:
+        color = 'orange';
+        break;
+      case 3:
+        color = 'greenyellow';
+        break;
+      case 4:
+        color = 'green';
+        break;
+    }
+    height = this.progressIndicator * 25;
+    const style = {'background-color': `${color}`, 'height': `${height}%` };
+    return style;
+  }
+
   ngOnInit(): void {
   }
 

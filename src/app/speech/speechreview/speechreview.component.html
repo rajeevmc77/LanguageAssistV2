@@ -12,13 +12,18 @@
                     <span>{{ word }}</span>
                     <i class="fa fa-volume-up" aria-hidden="true" (click)="speak(word)"></i>
                     <div>
-                        <span *ngIf="word === currentWord"> {{progressIndicatorText}}</span>
-                        <div [ngClass]="{'progress': progressIndicator == -1 ,
+                        <!-- <span *ngIf="word === currentWord"> {{progressIndicatorText}}</span> -->
+                        <!-- <div [ngClass]="{'progress': progressIndicator == -1 ,
                                         'progressRed': progressIndicator == 0 ,
                                         'progressOrange': progressIndicator == 1,
                                         'progressYellow': progressIndicator == 2,
                                         'progressGreen': progressIndicator >= 3
                                         }" *ngIf="word === currentWord">
+                        </div> -->
+                        <!-- *ngIf="word === currentWord" -->
+                        <div class="progress">
+                            <div class="progressItem" [ngStyle]="getProgressIndicator()" *ngIf="word === currentWord">
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -39,6 +39,7 @@ export class AppComponent implements AfterViewInit {
                   She hung it around her neck.
                   Seeing the bell her friends asked, "Sheebu, what a lovely bell you have."
                   Sheebu felt happy.`;
+    this.spokenStory = ' Sheebu was';
 
     // this.originalText = this.story;
     // this.spokenText = 'I am Rajiv. This is my sample application to help study English.';
