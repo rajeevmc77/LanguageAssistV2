@@ -78,4 +78,5 @@
     background-color: rgb(248, 241, 241);
     width: 0%;
     height: 100%;
+    flex-grow: 1;
 }
