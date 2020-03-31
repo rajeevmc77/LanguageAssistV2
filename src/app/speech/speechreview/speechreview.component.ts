@@ -38,6 +38,7 @@ export class SpeechreviewComponent implements OnInit {
     this.speechDiffString = this.textComparer.processDiff(this.originalText, this.spokenText);
     this.speechOmitedWords = this.textComparer.getOmitedTexts(this.originalText, this.spokenText);
     this.speechOmitedWords = [... new Set(this.speechOmitedWords) ];
+    this.speechOmitedWords = this.speechOmitedWords.sort();
     // this.rootElement.nativeElement.innerHTML = this.speechDiffString ;
   }
 
