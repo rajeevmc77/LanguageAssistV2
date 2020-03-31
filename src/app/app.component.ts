@@ -33,12 +33,7 @@ export class AppComponent implements AfterViewInit {
     this.audioPlayer = new AudioPlayer();
 
     this.story = `Sheebu was a sheep.
-                  One day she found a bell.
-                  She thought to herself 'Wow! What a tingle-jingle bell.
-                  I will wear this bell.'
-                  She hung it around her neck.
-                  Seeing the bell her friends asked, "Sheebu, what a lovely bell you have."
-                  Sheebu felt happy.`;
+                  One day she found a bell.`;
     this.spokenStory = ' Sheebu was';
 
     // this.originalText = this.story;
