@@ -21,7 +21,8 @@ export class SpeechreviewComponent implements OnInit {
   public isRecording: boolean;
   public currentWord;
   public progressIndicator;
-  public progressIndicatorText;
+  // public progressIndicatorText;
+  public wordStats;
 
 
   constructor(private rootElement: ElementRef, private zone: NgZone) {
@@ -30,11 +31,13 @@ export class SpeechreviewComponent implements OnInit {
     this.recorder = new SpeechRecogniser();
     this.isRecording = false;
     this.progressIndicator = 0;
+    this.wordStats = {};
   }
 
   public compareText() {
     this.speechDiffString = this.textComparer.processDiff(this.originalText, this.spokenText);
     this.speechOmitedWords = this.textComparer.getOmitedTexts(this.originalText, this.spokenText);
+    this.speechOmitedWords = [... new Set(this.speechOmitedWords) ];
     // this.rootElement.nativeElement.innerHTML = this.speechDiffString ;
   }
 
@@ -42,9 +45,21 @@ export class SpeechreviewComponent implements OnInit {
     this.speech.speak(message);
   }
 
+  addWordStats(wordstat) {
+    const style = this.getProgressIndicator(wordstat);
+    if (wordstat.word in this.wordStats) {
+      this.wordStats[wordstat.word].push({progress: wordstat.progress , spokenWord: wordstat.spokenWord});
+      this.wordStats[wordstat.word] = this.wordStats[wordstat.word].slice(-5);
+      this.wordStats[wordstat.word].style = style;
+    } else {
+      this.wordStats[wordstat.word] = [{progress: wordstat.progress , spokenWord: wordstat.spokenWord}] ;
+      this.wordStats[wordstat.word].style = style;
+    }
+  }
+
   public record(word) {
     this.progressIndicator = -1;
-    this.progressIndicatorText = '';
+    // this.progressIndicatorText = '';
     this.isRecording = !this.isRecording;
     this.currentWord = word;
     try {
@@ -57,12 +72,15 @@ export class SpeechreviewComponent implements OnInit {
               if ( resp.event === 'result') {
                 this.zone.run(() => {
                   this.progressIndicator = this.textComparer.getTextsMatch(spokenWord, word);
-                  this.isRecording = false;
-                  this.progressIndicatorText = `${this.progressIndicator * 25}%`;
+                  // this.isRecording = false;
+                  // this.progressIndicatorText = `${this.progressIndicator * 25}%`;
                 });
               }
               if ( resp.event === 'end') {
-                this.zone.run(() => { this.isRecording = false;  });
+                this.zone.run(() => {
+                  this.isRecording = false;
+                  this.addWordStats({ 'word': word, progress: this.progressIndicator, 'spokenWord': spokenWord });
+                });
                 this.recorder.stopListening();
               }
             }
@@ -78,24 +96,26 @@ export class SpeechreviewComponent implements OnInit {
     }
   }
 
-  getProgressIndicator() {
+  getProgressIndicator(wordstat) {
     let color = 'white';
     let height = 0;
-    switch (this.progressIndicator) {
-      case 1:
-        color = 'red';
-        break;
-      case 2:
-        color = 'orange';
-        break;
-      case 3:
-        color = 'greenyellow';
-        break;
-      case 4:
-        color = 'green';
-        break;
+    if (wordstat) {
+      switch (wordstat.progress) {
+        case 1:
+          color = 'red';
+          break;
+        case 2:
+          color = 'orange';
+          break;
+        case 3:
+          color = 'greenyellow';
+          break;
+        case 4:
+          color = 'green';
+          break;
+      }
+      height = wordstat.progress * 25;
     }
-    height = this.progressIndicator * 25;
     const style = {'background-color': `${color}`, 'height': `${height}%` };
     return style;
   }

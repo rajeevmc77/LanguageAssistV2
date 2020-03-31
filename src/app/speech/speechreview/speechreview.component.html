@@ -22,7 +22,7 @@
                         </div> -->
                         <!-- *ngIf="word === currentWord" -->
                         <div class="progress">
-                            <div class="progressItem" [ngStyle]="getProgressIndicator()" *ngIf="word === currentWord">
+                            <div class="progressItem" [ngStyle]="wordStats[word]?.style">
                             </div>
                         </div>
                     </div>

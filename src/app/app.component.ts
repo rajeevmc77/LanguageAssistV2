@@ -48,6 +48,13 @@ export class AppComponent implements AfterViewInit {
     //  throw new Error("Method not implemented.");
   }
 
+  showSelectedText() {
+    // let selection = window.getSelection();
+    // let range = selection.getRangeAt(0);
+    // let node = selection.anchorNode;
+    //console.log(selection);
+  }
+
 
   public recordCompleted(msg) {
     this.spokenStory = msg;

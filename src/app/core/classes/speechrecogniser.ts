@@ -16,7 +16,7 @@ export class SpeechRecogniser {
   constructor() {
     try {
       this.recognition = new SpeechRecognition();
-      this.recognition.maxAlternatives = 5;
+      this.recognition.maxAlternatives = 3;
       this.recognition.interimResults = true;
     } catch (exp) {
       console.log(exp.message);
