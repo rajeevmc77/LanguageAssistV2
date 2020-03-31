@@ -18,6 +18,7 @@ export class SpeechRecogniser {
       this.recognition = new SpeechRecognition();
       this.recognition.maxAlternatives = 3;
       this.recognition.interimResults = true;
+      this.spokenObj = {};
     } catch (exp) {
       console.log(exp.message);
     }
@@ -33,14 +34,18 @@ export class SpeechRecogniser {
         self.recognition.onresult = (resp: any) => {
           let spokenText;
           if ( 'results' in resp) {
-            spokenText = Array.from(resp.results)
-                        .map(result => result[0])
-                        .map(result => result.transcript)
-                        .join('');
-            let texts = Array.from(resp.results[0]);
-            texts = texts.map( (result: any) => {
-                          return {transcript: result.transcript, confidence: result.confidence }; });
-            self.spokenObj = { transcript : spokenText, altTranscripts: texts, event: 'result' };
+            try {
+                spokenText = Array.from(resp.results)
+                            .map(result => result[0])
+                            .map(result => result.transcript)
+                            .join('');
+                let texts = Array.from(resp.results[0]);
+                texts = texts.map( (result: any) => {
+                              return {transcript: result.transcript, confidence: result.confidence }; });
+                self.spokenObj = { transcript : spokenText, altTranscripts: texts, event: 'result' };
+            } catch (exp) {
+              console.log(exp.message);
+            }
           }
           obs.next(self.spokenObj);
         };

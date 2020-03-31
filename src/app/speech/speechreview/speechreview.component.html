@@ -9,7 +9,7 @@
                 <div class="omitedWords">
                     <i class="fa" [ngClass]="{'fa-microphone-slash': isRecording, 'fa-microphone': !isRecording}" aria-hidden="true" (click)="record(word)"></i>
                     <i class="fa fa-circle-notch fa-spin" aria-hidden="true" *ngIf="isRecording && word === currentWord"></i>
-                    <span>{{ word }}</span>
+                    <span (click)="setCurrentWord(word)">{{ word }}</span>
                     <i class="fa fa-volume-up" aria-hidden="true" (click)="speak(word)"></i>
                     <div>
                         <!-- <span *ngIf="word === currentWord"> {{progressIndicatorText}}</span> -->
@@ -31,8 +31,10 @@
         </div>
     </div>
     <div class="historycontainer">
-        <div> {{ currentWord }} History </div>
-        <div *ngFor="let status of wordStats[currentWord]" class="historyprogress">
+        <div>
+            <h3> Historical Score of Word {{ currentWord }} </h3>
+        </div>
+        <div *ngFor="let status of wordStats[currentWord]?.reverse()" class="historyprogress">
             <div class="progressItem" [ngStyle]="status?.style"> </div>
             <div style="text-align: center"> {{ status?.progress * 25 }}% </div>
         </div>

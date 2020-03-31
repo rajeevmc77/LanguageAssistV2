@@ -45,6 +45,9 @@ export class SpeechreviewComponent implements OnInit {
   public speak(message) {
     this.speech.speak(message);
   }
+  setCurrentWord(word) {
+    this.currentWord = word;
+  }
 
   addWordStats(wordstat) {
     const style = this.getProgressIndicator(wordstat);
@@ -64,8 +67,7 @@ export class SpeechreviewComponent implements OnInit {
   }
 
   public record(word) {
-    this.progressIndicator = -1;
-    // this.progressIndicatorText = '';
+    this.progressIndicator = 0;
     this.isRecording = !this.isRecording;
     this.currentWord = word;
     try {
@@ -107,6 +109,7 @@ export class SpeechreviewComponent implements OnInit {
     let height = 0;
     if (wordstat) {
       switch (wordstat.progress) {
+        case 0:
         case 1:
           color = 'red';
           break;
