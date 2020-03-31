@@ -32,10 +32,8 @@
     </div>
     <div class="historycontainer">
         <div> {{ currentWord }} History </div>
-        <div *ngFor="let status of wordStats[currentWord]">
-            <div class="historyprogress">
-                <div class="progressItem" [ngStyle]="status?.style">
-                </div>
+        <div *ngFor="let status of wordStats[currentWord]" class="historyprogress">
+            <div class="progressItem" [ngStyle]="status?.style">
             </div>
         </div>
     </div>

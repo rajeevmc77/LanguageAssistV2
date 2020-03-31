@@ -66,15 +66,16 @@
 }
 
 .historyprogress {
-    width: 5px;
+    width: 100%;
     background-color: white;
     display: flex;
+    flex-direction: row;
     height: 1em;
     /* align-items: flex-end; */
 }
 
 .historyprogressItem {
     background-color: rgb(248, 241, 241);
-    width: 100%;
+    width: 0%;
     height: 100%;
 }

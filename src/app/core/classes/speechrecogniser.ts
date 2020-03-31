@@ -57,9 +57,13 @@ export class SpeechRecogniser {
         };
         self.recognition.onend = (e: any) => {
           if ( self.mode === Mode.Listening) {
+            try {
             self.recognition.start();
             self.spokenObj.event = 'end' ;
             obs.next(self.spokenObj);
+            } catch (exp) {
+              console.log(exp.message);
+            }
           } else {
             obs.complete();
           }
