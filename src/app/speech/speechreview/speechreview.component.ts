@@ -49,11 +49,13 @@ export class SpeechreviewComponent implements OnInit {
   addWordStats(wordstat) {
     const style = this.getProgressIndicator(wordstat);
     if (wordstat.word in this.wordStats) {
-      this.wordStats[wordstat.word].push({progress: wordstat.progress , spokenWord: wordstat.spokenWord});
+      this.wordStats[wordstat.word].push(
+        {progress: wordstat.progress, spokenWord: wordstat.spokenWord, 'style': style});
       this.wordStats[wordstat.word] = this.wordStats[wordstat.word].slice(-5);
       this.wordStats[wordstat.word].style = style;
     } else {
-      this.wordStats[wordstat.word] = [{progress: wordstat.progress , spokenWord: wordstat.spokenWord}] ;
+      this.wordStats[wordstat.word] = [
+        {progress: wordstat.progress , spokenWord: wordstat.spokenWord, 'style': style}] ;
       this.wordStats[wordstat.word].style = style;
     }
   }

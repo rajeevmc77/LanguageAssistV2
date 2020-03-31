@@ -14,18 +14,27 @@
                     <div>
                         <!-- <span *ngIf="word === currentWord"> {{progressIndicatorText}}</span> -->
                         <!-- <div [ngClass]="{'progress': progressIndicator == -1 ,
-                                        'progressRed': progressIndicator == 0 ,
-                                        'progressOrange': progressIndicator == 1,
-                                        'progressYellow': progressIndicator == 2,
-                                        'progressGreen': progressIndicator >= 3
-                                        }" *ngIf="word === currentWord">
-                        </div> -->
+                                      'progressRed': progressIndicator == 0 ,
+                                      'progressOrange': progressIndicator == 1,
+                                      'progressYellow': progressIndicator == 2,
+                                      'progressGreen': progressIndicator >= 3
+                                      }" *ngIf="word === currentWord">
+                      </div> -->
                         <!-- *ngIf="word === currentWord" -->
                         <div class="progress">
                             <div class="progressItem" [ngStyle]="wordStats[word]?.style">
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="historycontainer">
+        <div> {{ currentWord }} History </div>
+        <div *ngFor="let status of wordStats[currentWord]">
+            <div class="historyprogress">
+                <div class="progressItem" [ngStyle]="status?.style">
                 </div>
             </div>
         </div>
