@@ -23,6 +23,7 @@
     "angular-http-server": "^1.9.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
+    "xregexp": "^4.3.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

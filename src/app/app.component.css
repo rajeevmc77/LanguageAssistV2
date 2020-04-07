@@ -3,115 +3,63 @@
     margin: 0;
 }
 
-.header {
-    grid-area: header;
-    font-size: 30px;
-    text-align: center;
-}
-
-.container {
-    display: grid;
-    grid-template-areas: 'header header header' 'story-page story-review story-assessment' 'learning learning learning';
-    grid-gap: 2px;
-    background-color: rgb(104, 224, 245);
-    width: 100vw;
-    height: 100vh;
-    grid-template-rows: 50px 1fr 100px;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-@media only screen and (max-width: 600px) {
-    .container {
-        display: grid;
-        grid-template-areas: 'header' 'story-page' 'story-review' 'story-assessment' 'learning';
-        grid-gap: 2px;
-        background-color: rgb(104, 224, 245);
-        width: 96vw;
-        height: 96vh;
-        grid-template-rows: 1fr 300px 1fr 1fr 1fr;
-        grid-template-columns: auto;
-        grid-auto-rows: minmax(200px, auto);
-    }
-}
-
-.story-page {
-    grid-area: story-page;
-}
-
-.story-review {
-    grid-area: story-review;
+.main {
+    width: 97%;
     display: flex;
-    flex-direction: column;
-    /* grid-template-rows: repeat(2, 1fr); */
-    /* grid-template-columns: 98%; */
-    /* grid-auto-rows: minmax(200px, auto); */
-    grid-gap: 1px;
-}
-
-.story-assessment {
-    grid-area: story-assessment;
-    display: flex;
+    align-items: stretch;
     flex-direction: column;
 }
 
-.learning {
-    grid-area: learning;
-}
-
-.story-page>img {
-    width: 100%;
-    height: 100%;
-    opacity: 0.3;
-}
-
-
-/*
-#dvTextToRead {
-    border-color: blue;
-    border-width: 1px;
-    border-style: solid;
-    position: relative;
-}
-
-#dvSpeechArea {
-    border-color: blue;
-    border-width: 1px;
-    border-style: solid;
-}
-
-#dvSpeechDiffArea {
-    border-color: blue;
-    border-width: 1px;
-    border-style: solid;
-} */
-
-
-/* #dvSpokenText{
-  position:relative;
-} */
-
-
-/* #dvSpeachProgressIndicator {
-    height: 30px;
-    width: 30px;
-    display: inline-block;
-    position: relative;
-    display: none;
-}
-
-#dvSpeachProgressIndicator>img {
-    max-width: 100%;
-    height: 100%;
-} */
-
-.container>div {
+.main>div {
     padding: 10px;
     background-color: rgb(255, 255, 255);
     /* padding: 10px 0; */
 }
 
-.story-review>div {
+.main-header {
+    font-size: 30px;
+    text-align: center;
+    flex-grow: 1;
+    height: 50px;
+}
+
+.main-body {
+    display: grid;
+    grid-gap: 2px;
+    background-color: rgb(104, 224, 245);
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+}
+
+.main-story-page {}
+
+.main-story-page>img {
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+}
+
+.main-story-review {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1px;
+}
+
+.main-story-review>div {
     text-align: justify;
+}
+
+.main-story-assessment {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-footer {
+    font-size: 30px;
+    text-align: center;
+    flex-grow: 1;
+    height: 50px;
 }
 
 a.assessment>i:hover {
@@ -125,7 +73,6 @@ a.assessment {
 .box {
     position: relative;
     display: inline-block;
-    /* Make the width of box same as image */
 }
 
 .box>img {
@@ -144,8 +91,23 @@ a.assessment {
     /* Adjust this value to move the positioned div up and down */
     text-align: center;
     /* Set the width of the positioned div */
-    color: black;
+    /* color: black; */
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
     font-weight: 400;
 }
+
+
+/* @media only screen and (max-width: 600px) {
+    .container {
+        display: grid;
+        grid-template-areas: 'header' 'story-page' 'story-review' 'story-assessment' 'learning';
+        grid-gap: 2px;
+        background-color: rgb(104, 224, 245);
+        width: 96vw;
+        height: 96vh;
+        grid-template-rows: 1fr 300px 1fr 1fr 1fr;
+        grid-template-columns: auto;
+        grid-auto-rows: minmax(200px, auto);
+    }
+} */

@@ -1,0 +1,46 @@
+aws-eb-englishassist
+
+Itschool
+
+
+/home/user/.ssh/aws-eb-englishassist
+
+
+/rajeev/Work/AWS 
+
+Note: To complete installation, ensure `eb` is in PATH. You can ensure this by executing:
+
+    1. Bash:
+
+       echo 'export PATH="/home/user/.ebcli-virtual-env/executables:$PATH"' >> ~/.bash_profile && source ~/.bash_profile
+
+    2. Zsh:
+
+       echo 'export PATH="/home/user/.ebcli-virtual-env/executables:$PATH"' >> ~/.zshenv && source ~/.zshenv
+
+   
+    - NOTE: To complete installation, ensure `python` is in PATH. You can ensure this by executing:
+   
+      1. Bash:
+   
+         echo 'export PATH=/home/user/.pyenv/versions/3.7.2/bin:$PATH' >> /home/user/.bash_profile && source /home/user/.bash_profile
+   
+      2. Zsh:
+   
+         echo 'export PATH=/home/user/.pyenv/versions/3.7.2/bin:$PATH' >> /home/user/.zshrc && source /home/user/.zshrc
+
+$ mkdir HelloWorld
+$ cd HelloWorld
+$ eb init -p PHP
+$ echo "Hello World" > index.html
+$ eb create dev-env
+$ eb open
+
+
+http://english-assist.s3-website.ap-south-1.amazonaws.com
+
+https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fap-south-1.console.aws.amazon.com%2Fconsole%2Fhome%3Fregion%3Dap-south-1%26state%3DhashArgs%2523%26isauthcode%3Dtrue&client_id=arn%3Aaws%3Aiam%3A%3A015428540659%3Auser%2Fhomepage&forceMobileApp=0&code_challenge=0paHXu3wYdo6PmajRrmKjOUYtMyTU-LUOGNIN6YlpYg&code_challenge_method=SHA-256
+
+https://aws.amazon.com/
+
+

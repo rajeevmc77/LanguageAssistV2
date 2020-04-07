@@ -7,7 +7,7 @@ body {
     display: flex;
     display: grid;
     /* flex-direction: row; */
-    grid-template-columns: 7em repeat(auto-fit, minmax(25rem, 1fr));
+    grid-template-columns: 6em repeat(auto-fit, minmax(20rem, 1fr));
     align-items: left;
     justify-content: left;
 }

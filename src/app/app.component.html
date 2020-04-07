@@ -1,23 +1,24 @@
-<div class="container">
-    <div class="header"> ECube English Helper</div>
-    <div class="story-page">
-        <div class="box">
-            <img src="assets/img/sheebu.png" />
-            <div class="text">
-                <p (click)="showSelectedText()"> {{story}} </p>
+<div class="main">
+    <div class="main-header"> ECube English Helper</div>
+    <div class="main-body">
+        <div class="main-story-page">
+            <div class="box">
+                <img src="assets/img/sheebu.png" />
+                <div class="text">
+                    <p (click)="showSelectedText()"> {{story}} </p>
+                </div>
+            </div>
+            <div>
+                <app-recorder #recorder (completed)="recordCompleted($event)"> </app-recorder>
             </div>
         </div>
-        <div>
-            <app-recorder #recorder (completed)="recordCompleted($event)"> </app-recorder>
+        <div class="main-story-review ">
+            <app-speechreview [originalText]="story" [spokenText]="spokenStory"></app-speechreview>
+        </div>
+        <div class="main-story-assessment">
+            <app-speechassess [originalText]="story" [spokenText]="spokenStory"></app-speechassess>
         </div>
     </div>
-    <div class="story-review">
-        <app-speechreview [originalText]="story" [spokenText]="spokenStory"></app-speechreview>
-
-    </div>
-    <div class="story-assessment">
-        <app-speechassess [originalText]="story" [spokenText]="spokenStory"></app-speechassess>
-    </div>
-    <div class="learning">
+    <div class="main-footer">
     </div>
 </div>
