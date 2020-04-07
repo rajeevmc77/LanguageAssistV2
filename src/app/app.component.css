@@ -4,7 +4,7 @@
 }
 
 .main {
-    width: 97%;
+    width: 96%;
     display: flex;
     align-items: stretch;
     flex-direction: column;
@@ -101,7 +101,7 @@ a.assessment {
         background-color: rgb(104, 224, 245);
         width: 100%;
         height: 100%;
-        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     }
 }
 
@@ -115,6 +115,6 @@ a.assessment {
         background-color: rgb(104, 224, 245);
         width: 100%;
         height: 100%;
-        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     }
 }
