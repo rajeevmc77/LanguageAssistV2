@@ -7,7 +7,7 @@ body {
     display: flex;
     display: grid;
     /* flex-direction: row; */
-    grid-template-columns: 6em repeat(auto-fit, minmax(14rem, 1fr));
+    grid-template-columns: 6em repeat(auto-fit, minmax(150px, 1fr));
     align-items: left;
     justify-content: left;
 }
@@ -29,8 +29,8 @@ body {
 }
 
 .google-microphone {
-    width: 5em;
-    height: 5em;
+    width: 4em;
+    height: 4em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,12 +52,12 @@ body {
 
 @-webkit-keyframes move_eye {
     from {
-        width: 5em;
+        width: 4em;
         height: 4em;
     }
     to {
-        width: 6em;
-        height: 6em;
+        width: 5em;
+        height: 5em;
     }
 }
 
@@ -123,4 +123,31 @@ body {
     left: 40%;
     width: 20%;
     height: 25%;
+}
+
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+    .container {
+        width: 100%;
+        display: flex;
+        display: grid;
+        /* flex-direction: row; */
+        grid-template-columns: 5em repeat(auto-fit, minmax(12rem, 1fr));
+        align-items: left;
+        justify-content: left;
+    }
+}
+
+
+/* #### Mobile Phones Landscape #### */
+
+@media screen and (max-device-width: 480px) and (orientation: landscape) {
+    .container {
+        width: 100%;
+        display: flex;
+        display: grid;
+        /* flex-direction: row; */
+        grid-template-columns: 5em repeat(auto-fit, minmax(19rem, 1fr));
+        align-items: left;
+        justify-content: left;
+    }
 }
