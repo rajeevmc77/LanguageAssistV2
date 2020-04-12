@@ -1,4 +1,9 @@
 <div class="container">
+    <div class="spokenBox">
+        <p> {{ spokenWord }} </p>
+        <p> {{ spokenStory }} </p>
+        <p class="error" *ngIf="errorMessage?.length > 0"> {{ errorMessage }} </p>
+    </div>
     <div class="recordControl">
         <div class="google-microphone" (click)="startListening()">
             <div [ngClass]="{'shadow listening': isListening }">
@@ -8,10 +13,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="spokenBox">
-        <p> {{ spokenWord }} </p>
-        <p> {{ spokenStory }} </p>
-        <p class="error" *ngIf="errorMessage?.length > 0"> {{ errorMessage }} </p>
     </div>
 </div>
